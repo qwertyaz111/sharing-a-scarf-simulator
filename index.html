@@ -164,7 +164,7 @@
     </div>
 
     <div id="ui-content">
-        <p class="app-description">性別と身長からマフラー共有ポーズをシミュレートします。</p>
+        <p class="app-description">身長差に合わせたマフラー共有ポーズをシミュレートします。</p>
         
         <div class="input-group group-a">
             <div class="section-header"><strong>A</strong></div>
@@ -198,6 +198,8 @@
         </div>
 
         <div style="padding: 0 5px;">
+            <button class="switch-btn" onclick="swapAB()">⇄ AとBを入れ替える</button>
+
             <button class="switch-btn" onclick="switchView()">🔄 視点を切り替える</button>
         </div>
         
@@ -254,6 +256,7 @@
         
         window.updateScene = updateScene;
         window.switchView = switchView;
+        window.swapAB = swapAB;
         window.shareToX = shareToX;
         window.togglePanel = () => {
             const panel = document.getElementById('ui-panel');
@@ -264,6 +267,35 @@
 
         updateScene();
         animate();
+    }
+
+    function swapAB() {
+        const nameA = document.getElementById('nameA');
+        const genderA = document.getElementById('genderA');
+        const heightA = document.getElementById('heightA');
+        const colorA = document.getElementById('colorA');
+
+        const nameB = document.getElementById('nameB');
+        const genderB = document.getElementById('genderB');
+        const heightB = document.getElementById('heightB');
+        const colorB = document.getElementById('colorB');
+
+        const tempName = nameA.value;
+        const tempGender = genderA.value;
+        const tempHeight = heightA.value;
+        const tempColor = colorA.value;
+
+        nameA.value = nameB.value;
+        genderA.value = genderB.value;
+        heightA.value = heightB.value;
+        colorA.value = colorB.value;
+
+        nameB.value = tempName;
+        genderB.value = tempGender;
+        heightB.value = tempHeight;
+        colorB.value = tempColor;
+
+        updateScene();
     }
 
     function onWindowResize() {
